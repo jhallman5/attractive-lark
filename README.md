@@ -1,6 +1,7 @@
 # timely-frog
 Team Members: John Hallman (size 1) 
-Benchmark calculator goal Week 11 
+Week: 11 
+Goal: Benchmark calculator goal -> https://github.com/GuildCrafts/web-development-js/issues/150
 
 
 # Calculator Benchmark
