@@ -1,6 +1,8 @@
 # timely-frog
+
 Team Members: John Hallman (size 1) 
 Week: 11 
+
 Goal: Benchmark calculator goal -> https://github.com/GuildCrafts/web-development-js/issues/150
 
 
@@ -82,7 +84,7 @@ In stage 1 you will only be using `HTML` and `CSS` to build a clone of the OS X 
 - [X] All text is in the [Roboto](https://fonts.google.com/specimen/Roboto) web font
 - [X] Your `HTML` and `CSS` follows this [style guide](https://google.github.io/styleguide/htmlcssguide.xml)
 - [X] The calculator is positioned in the center of the page, both vertically and horizontally
-- [X] The calculator is a fixed size. It does not change in size when the page resizes. 
+- [X] The calculator is a fixed size. It does not change in size when the page resizes.
 - [X] If the window is too small for the calculator, the page scrolls, both vertically and horizontally
 - [X] Each button has a CSS transition to slightly darken the background color on hover over 100ms
 - [X] Each button has a CSS transition to slightly darken the background color on click over 100ms
