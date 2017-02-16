@@ -31,6 +31,7 @@ document.querySelector('.calculator').addEventListener('click', function(e) {
         s.currentStack = 'operator'
   }
 
+//this could be moved outside
   if(s.currentStack === 'operand' && s.operand.length > 0) {
     document.querySelector('.clear').innerHTML = 'C'
   }
@@ -53,34 +54,44 @@ document.querySelector('.calculator').addEventListener('click', function(e) {
     }
 
   document.querySelector('.calculator-screen').innerHTML = s.operand[s.operand.length -1 ] || ''
+})
+
+window.addEventListener('keypress', function(event) {
+  var target = String.fromCharCode(event.which)
+
+
+  console.log(target)
+
+
+
   })
 
-  function checkPriority(stackOps, stackNum) {
-    if(stackOps.length > 1) {
-      var lastOperator = stackOps.pop()
-      while(operatorHasLowerPriority(stackOps, lastOperator) && stackOps.length > 0) {
-        stackNum.push(evalulate(stackNum, stackOps) )
-      }
-      stackOps.push(lastOperator)
+function checkPriority(stackOps, stackNum) {
+  if(stackOps.length > 1) {
+    var lastOperator = stackOps.pop()
+    while(operatorHasLowerPriority(stackOps, lastOperator) && stackOps.length > 0) {
+      stackNum.push(evalulate(stackNum, stackOps) )
     }
+    stackOps.push(lastOperator)
   }
+}
 
-  function operatorHasLowerPriority(stackOps, operator) {
-    var currentStackPriority = stackOps[stackOps.length - 1] === ('+' ||'-') ? 1 : 2
-    var operatorPriority = operator === ('+' || '-') ? 1 : 2
-    return operatorPriority < currentStackPriority ? true : false
-  }
+function operatorHasLowerPriority(stackOps, operator) {
+  var currentStackPriority = stackOps[stackOps.length - 1] === ('+' ||'-') ? 1 : 2
+  var operatorPriority = operator === ('+' || '-') ? 1 : 2
+  return operatorPriority < currentStackPriority ? true : false
+}
 
-  function evalulate(stackNum, stackOps) {
-    var value1 = stackNum.pop()
-    var comparison = stackOps.pop()
-    var value2 = stackNum.pop()
-    return eval(value2 + comparison + value1).toString()
-  }
+function evalulate(stackNum, stackOps) {
+  var value1 = stackNum.pop()
+  var comparison = stackOps.pop()
+  var value2 = stackNum.pop()
+  return eval(value2 + comparison + value1).toString()
+}
 
-  function equate(stackNum, stackOps) {
-    while(stackNum.length > 1) {
-      stackNum.push(evalulate(stackNum, stackOps))
-    }
-    return stackNum
+function equate(stackNum, stackOps) {
+  while(stackNum.length > 1) {
+    stackNum.push(evalulate(stackNum, stackOps))
   }
+  return stackNum
+}
