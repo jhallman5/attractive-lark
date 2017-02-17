@@ -4,8 +4,8 @@ var stacks = {
   currentStack: 'operand'
   }
 
-document.querySelector('.calculator').addEventListener('click', function(e) {
-  var target = e.target || e.srcElement
+document.querySelector('.calculator').addEventListener('click', function (event) {
+  var target = event.target || event.srcElement
   var s = stacks
 
   if (target.dataset.value) {
@@ -31,7 +31,7 @@ document.querySelector('.calculator').addEventListener('click', function(e) {
         s.currentStack = 'operator'
   }
 
-//this could be moved outside
+//can remove this from the eventListner
   if(s.currentStack === 'operand' && s.operand.length > 0) {
     document.querySelector('.clear').innerHTML = 'C'
   }
@@ -58,13 +58,34 @@ document.querySelector('.calculator').addEventListener('click', function(e) {
 
 window.addEventListener('keypress', function(event) {
   var target = String.fromCharCode(event.which)
+  var s = stacks
+  var operatorsCharArray = [43, 45, 42, 47]
 
+  if(target.charCodeAt(0) < 58 && target.charCodeAt(0) > 47){
+    if(s.currentStack === 'operand') {
+      if(s.operand.length === 0) {
+        s.operand.push(target)
+      }else {
+        var value = s.operand.pop()
+        value = value + target
+        s.operand.push(value)
+      }
+    }else {
+      checkPriority(s.operator, s.operand)
+      s.operand.push(target)
+      s.currentStack = 'operand'
+    }
+  }else if(operatorsCharArray.includes( target.charCodeAt(0)) ) {
+    s.currentStack === 'operator'
+      ? s.operator[s.operator.length - 1] = target
+      : s.operator.push(target)
+        s.currentStack = 'operator'
+  }else if(target.charCodeAt(0) === 61 || 13 ) {
+     equate(s.operand, s.operator)
+  }
 
-  console.log(target)
-
-
-
-  })
+  document.querySelector('.calculator-screen').innerHTML = s.operand[s.operand.length -1 ] || ''
+})
 
 function checkPriority(stackOps, stackNum) {
   if(stackOps.length > 1) {
@@ -95,3 +116,10 @@ function equate(stackNum, stackOps) {
   }
   return stackNum
 }
+
+
+
+//  things still that still need to be done in stage 2
+//   - add CSS active on keydown event
+//   -change the font size of the number when it reaches 8 charaters long
+//   - clean up
