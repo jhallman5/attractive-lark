@@ -52,7 +52,6 @@ document.querySelector('.calculator').addEventListener('click', function (event)
   if(target.dataset.equal) {
      equate(s.operand, s.operator)
     }
-
   document.querySelector('.calculator-screen').innerHTML = s.operand[s.operand.length -1 ] || ''
 })
 
@@ -83,6 +82,7 @@ window.addEventListener('keypress', function(event) {
   }else if(target.charCodeAt(0) === 61 || 13 ) {
      equate(s.operand, s.operator)
   }
+
 
   document.querySelector('.calculator-screen').innerHTML = s.operand[s.operand.length -1 ] || ''
 })
@@ -117,9 +117,63 @@ function equate(stackNum, stackOps) {
   return stackNum
 }
 
+function findDivToHighlight(parentDiv, valueToFind) {
+  var interiorDivs = parentDiv.getElementsByTagName('div')
+  var soughtAfterDiv;
+
+  for(var i = 0; i < interiorDivs.length; i++) {
+    if(interiorDivs[i].dataset.value === valueToFind) {
+      soughtAfterDiv = interiorDivs[i]
+    }
+   }
+
+   return soughtAfterDiv
+}
+
+function findOperatorToHighlight(parentDiv, valueToFind) {
+  var interiorDivs = parentDiv.getElementsByTagName('div')
+  var soughtAfterDiv;
+
+  for(var i = 0; i < interiorDivs.length; i++) {
+    if(interiorDivs[i].dataset.operator === valueToFind) {
+      soughtAfterDiv = interiorDivs[i]
+    }
+   }
+
+   return soughtAfterDiv
+}
 
 
 //  things still that still need to be done in stage 2
 //   - add CSS active on keydown event
-//   -change the font size of the number when it reaches 8 charaters long
+//   - change the font size of the number when it reaches 8 charaters long
 //   - clean up
+
+
+window.addEventListener('keydown', function(event) {
+  var target = String.fromCharCode(event.which)
+  var targetdiv;
+  var operatorsCharArray = [43, 45, 42, 47]
+
+  if(target.charCodeAt(0) < 58 && target.charCodeAt(0) > 47){
+    targetdiv = findDivToHighlight(document.querySelector('.calculator'), target)
+    targetdiv.className += ' greyKeyDown'
+  }else if( operatorsCharArray.includes( target.charCodeAt(0)) ){
+    targetdiv = findOperatorToHighlight(document.querySelector('.calculator'), target)
+    targetdiv.className += ' orangeKeyDown'
+  }
+})
+
+window.addEventListener('keyup', function(event) {
+  var target = String.fromCharCode(event.which)
+  var targetdiv;
+  var operatorsCharArray = [43, 45, 42, 47]
+
+  if(target.charCodeAt(0) < 58 && target.charCodeAt(0) > 47){
+    targetdiv = findDivToHighlight(document.querySelector('.calculator'), target)
+    targetdiv.className = targetdiv.className.replace( /(?:^|\s)greyKeyDown(?!\S)/g , '' )
+  }else if( operatorsCharArray.includes( target.charCodeAt(0)) ){
+    targetdiv =findOperatorToHighlight(document.querySelector('.calculator'), target)
+    targetdiv.className = targetdiv.className.replace( /(?:^|\s)orangeKeyDown(?!\S)/g , '' )
+  }
+})
