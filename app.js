@@ -6,39 +6,39 @@ var stacks = {
 
 document.querySelector('.calculator').addEventListener('click', function (event) {
   var target = event.target || event.srcElement
-  var s = stacks
 
   if (target.dataset.value) {
-    if(s.currentStack === 'operand') {
-      if(s.operand.length === 0) {
-        s.operand.push(target.dataset.value)
+    if(stacks.currentStack === 'operand') {
+      if(stacks.operand.length === 0) {
+        stacks.operand.push(target.dataset.value)
       }else {
-        var value = s.operand.pop()
+        var value = stacks.operand.pop()
         value = value + target.dataset.value
-        s.operand.push(value)
+        stacks.operand.push(value)
       }
     }else {
-      checkPriority(s.operator, s.operand)
-      s.operand.push(target.dataset.value)
-      s.currentStack = 'operand'
+      checkPriority(stacks.operator, stacks.operand)
+      stacks.operand.push(target.dataset.value)
+      stacks.currentStack = 'operand'
     }
   }
 
   if(target.dataset.operator){
-    s.currentStack === 'operator'
-      ? s.operator[s.operator.length - 1] = target.dataset.operator
-      : s.operator.push(target.dataset.operator)
-        s.currentStack = 'operator'
+    if(stacks.currentStack === 'operator') {
+       stacks.operator[stacks.operator.length - 1] = target.dataset.operator
+    }else {
+      stacks.operator.push(target.dataset.operator)
+      stacks.currentStack = 'operator'
+    }
   }
 
-//can remove this from the eventListner
-  if(s.currentStack === 'operand' && s.operand.length > 0) {
+  if(stacks.currentStack === 'operand' && stacks.operand.length > 0) {
     document.querySelector('.clear').innerHTML = 'C'
   }
 
   if(target.dataset.clear) {
-    if( document.querySelector('.clear').innerHTML === 'C' && s.currentStack === 'operand') {
-      s.operand.pop()
+    if( document.querySelector('.clear').innerHTML === 'C' && stacks.currentStack === 'operand') {
+      stacks.operand.pop()
       document.querySelector('.clear').innerHTML = "AC"
     }else if (document.querySelector('.clear').innerHTML = "AC") {
       stacks = {
@@ -50,41 +50,42 @@ document.querySelector('.calculator').addEventListener('click', function (event)
   }
 
   if(target.dataset.equal) {
-     equate(s.operand, s.operator)
+     equate(stacks.operand, stacks.operator)
     }
-  document.querySelector('.calculator-screen').innerHTML = s.operand[s.operand.length -1 ] || ''
+  document.querySelector('.calculator-screen').innerHTML = stacks.operand[stacks.operand.length -1 ] || ''
 })
 
 window.addEventListener('keypress', function(event) {
   var target = String.fromCharCode(event.which)
-  var s = stacks
   var operatorsCharArray = [43, 45, 42, 47]
 
   if(target.charCodeAt(0) < 58 && target.charCodeAt(0) > 47){
-    if(s.currentStack === 'operand') {
-      if(s.operand.length === 0) {
-        s.operand.push(target)
+    if(stacks.currentStack === 'operand') {
+      if(stacks.operand.length === 0) {
+        stacks.operand.push(target)
       }else {
-        var value = s.operand.pop()
+        var value = stacks.operand.pop()
         value = value + target
-        s.operand.push(value)
+        stacks.operand.push(value)
       }
     }else {
-      checkPriority(s.operator, s.operand)
-      s.operand.push(target)
-      s.currentStack = 'operand'
+      checkPriority(stacks.operator, stacks.operand)
+      stacks.operand.push(target)
+      stacks.currentStack = 'operand'
     }
   }else if(operatorsCharArray.includes( target.charCodeAt(0)) ) {
-    s.currentStack === 'operator'
-      ? s.operator[s.operator.length - 1] = target
-      : s.operator.push(target)
-        s.currentStack = 'operator'
+    if(stacks.currentStack === 'operator') {
+      stacks.operator[stacks.operator.length - 1] = target
+    }else {
+      stacks.operator.push(target)
+      stacks.currentStack = 'operator'
+    }
   }else if(target.charCodeAt(0) === 61 || 13 ) {
-     equate(s.operand, s.operator)
+     equate(stacks.operand, stacks.operator)
   }
 
 
-  document.querySelector('.calculator-screen').innerHTML = s.operand[s.operand.length -1 ] || ''
+  document.querySelector('.calculator-screen').innerHTML = stacks.operand[stacks.operand.length -1 ] || ''
 })
 
 function checkPriority(stackOps, stackNum) {
@@ -142,13 +143,6 @@ function findOperatorToHighlight(parentDiv, valueToFind) {
 
    return soughtAfterDiv
 }
-
-
-//  things still that still need to be done in stage 2
-//   - add CSS active on keydown event
-//   - change the font size of the number when it reaches 8 charaters long
-//   - clean up
-
 
 window.addEventListener('keydown', function(event) {
   var target = String.fromCharCode(event.which)
