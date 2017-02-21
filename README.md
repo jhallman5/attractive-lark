@@ -1,4 +1,4 @@
-# tattractive lark
+# attractive lark
 Team Members: John Hallman (size 1)
 Week: 12
 Goal: Benchmark calculator goal -> https://github.com/GuildCrafts/web-development-js/issues/150
