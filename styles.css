@@ -77,3 +77,9 @@ body {
 .operation:active {
   background-color: #cc860d;
 }
+.greyKeyDown {
+  background-color: #c3c3c3;
+}
+.orangeKeyDown {
+  background-color: #cc860d;
+}
