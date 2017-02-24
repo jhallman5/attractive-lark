@@ -130,7 +130,7 @@ function setCalculatorScreen(promiseValue) {
 
 function add(a, b, callback) {
   fetch(`/api/add/${a}/${b}`)
-    .then(response => response.text())
+    .then(response => {response.json()})
     .then(result =>{
         callback(result)
     })
