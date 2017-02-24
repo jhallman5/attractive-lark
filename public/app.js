@@ -4,8 +4,8 @@ var stacks = {
   currentStack: 'operand'
   }
 
-document.querySelector('.calculator').addEventListener('click', function (event) {
-  var target = event.target || event.srcElement
+document.querySelector('.calculator').addEventListener('click', function(target) {
+var target = event.target || event.srcElement
 
   if (target.dataset.value) {
     if(stacks.currentStack === 'operand') {
@@ -83,8 +83,6 @@ window.addEventListener('keypress', function(event) {
   }else if(target.charCodeAt(0) === 61 || 13 ) {
      equate(stacks.operand, stacks.operator)
   }
-
-
   document.querySelector('.calculator-screen').innerHTML = stacks.operand[stacks.operand.length -1 ] || ''
 })
 
@@ -92,7 +90,7 @@ function checkPriority(stackOps, stackNum) {
   if(stackOps.length > 1) {
     var lastOperator = stackOps.pop()
     while(operatorHasLowerPriority(stackOps, lastOperator) && stackOps.length > 0) {
-      stackNum.push(evalulate(stackNum, stackOps) )
+      evalulate(stackNum, stackOps)
     }
     stackOps.push(lastOperator)
   }
@@ -105,15 +103,63 @@ function operatorHasLowerPriority(stackOps, operator) {
 }
 
 function evalulate(stackNum, stackOps) {
-  var value1 = stackNum.pop()
+  var value1 = parseFloat(stackNum.pop())
   var comparison = stackOps.pop()
-  var value2 = stackNum.pop()
-  return eval(value2 + comparison + value1).toString()
+  var value2 = parseFloat(stackNum.pop())
+  switch (comparison) {
+    case '+':
+      value1 = add(value1, value2, setCalculatorScreen)
+
+      break;
+    case '-':
+      value1 = subtract(value1, value2, setCalculatorScreen)
+      break;
+    case '*':
+      value1 = multiply(value1, value2, setCalculatorScreen)
+      break;
+    case '/':
+      value1 = divide(value1, value2, setCalculatorScreen)
+      break;
+    }
+}
+
+function setCalculatorScreen(promiseValue) {
+  stacks.operand.push(promiseValue)
+  document.querySelector('.calculator-screen').innerHTML = promiseValue
+}
+
+function add(a, b, callback) {
+  fetch(`/api/add/${a}/${b}`)
+    .then(response => response.text())
+    .then(result =>{
+        callback(result)
+    })
+}
+function subtract(a, b,callback) {
+  fetch(`/api/subtract/${a}/${b}`)
+    .then(response => response.text())
+    .then(result => {
+      callback(result)
+    })
+}
+function multiply(a, b, callback) {
+  fetch(`/api/multiply/${a}/${b}`)
+    .then(response => response.text())
+    .then(result => {
+      callback(result)
+    })
+}
+function divide(a, b, callback) {
+  fetch(`/api/divide/${a}/${b}`)
+    .then(response => response.text())
+    .then(result => {
+      callback(result)
+    })
 }
 
 function equate(stackNum, stackOps) {
   while(stackNum.length > 1) {
-    stackNum.push(evalulate(stackNum, stackOps))
+    evalulate(stackNum, stackOps)
   }
   return stackNum
 }
@@ -127,7 +173,6 @@ function findDivToHighlight(parentDiv, valueToFind) {
       soughtAfterDiv = interiorDivs[i]
     }
    }
-
    return soughtAfterDiv
 }
 

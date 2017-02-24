@@ -1,8 +1,10 @@
-# timely-frog
+# attractive lark
 Team Members: John Hallman (size 1)
-Week: 11
+Week: 12
 Goal: Benchmark calculator goal -> https://github.com/GuildCrafts/web-development-js/issues/150
 
+*** Note ***
+Due to beign placed on this project again, SEP instructed me to build off of last weeks project because my goal is to gain proficiency with databases and routes. Using last week as foundation I will start on stage 4. 
 
 # Calculator Benchmark
 
@@ -79,15 +81,15 @@ In stage 1 you will only be using `HTML` and `CSS` to build a clone of the OS X 
 
 ##### Specs
 
-- [X] All text is in the [Roboto](https://fonts.google.com/specimen/Roboto) web font
-- [X] Your `HTML` and `CSS` follows this [style guide](https://google.github.io/styleguide/htmlcssguide.xml)
-- [X] The calculator is positioned in the center of the page, both vertically and horizontally
-- [X] The calculator is a fixed size. It does not change in size when the page resizes.
-- [X] If the window is too small for the calculator, the page scrolls, both vertically and horizontally
-- [X] Each button has a CSS transition to slightly darken the background color on hover over 100ms
-- [X] Each button has a CSS transition to slightly darken the background color on click over 100ms
-- [X] All class names re: the calculator are name-spaced under `.calculator-…`
-- [X] Your stylesheet contains little to no duplicate style declarations
+- [completed] All text is in the [Roboto](https://fonts.google.com/specimen/Roboto) web font
+- [completed] Your `HTML` and `CSS` follows this [style guide](https://google.github.io/styleguide/htmlcssguide.xml)
+- [completed] The calculator is positioned in the center of the page, both vertically and horizontally
+- [completed] The calculator is a fixed size. It does not change in size when the page resizes.
+- [completed] If the window is too small for the calculator, the page scrolls, both vertically and horizontally
+- [completed] Each button has a CSS transition to slightly darken the background color on hover over 100ms
+- [completed] Each button has a CSS transition to slightly darken the background color on click over 100ms
+- [completed] All class names re: the calculator are name-spaced under `.calculator-…`
+- [completed] Your stylesheet contains little to no duplicate style declarations
 
 
 
@@ -116,15 +118,15 @@ In stage 2 you will be adding `JavaScript` to make the calculator work.
 
 ##### Specs
 
-- [X] Your `JavaScript` is written in `ES5`
-- [X] Your `JavaScript` follows this [style guide](https://google.github.io/styleguide/jsguide.html)
-- [X] Your JavaScript defines 1 or less global variables
-- [X] The Calculator display is not an `<input>`
-- [X] Typing a relevant key at any point is reflected on the calculator
-- [X] Typing a relevant key causes the corresponding button on the calculator to appear to have been pressed. AKA flashes active
-- [X] The state of the calculator is not be stored in the `DOM`
-- [X] The mathematical operations for your calculator are each their own function, and are defined outside of any DOM event handler
-- [X] When the length of the number displayed exceeds the width available, the font-size deterministically drops
+- [completed] Your `JavaScript` is written in `ES5`
+- [completed] Your `JavaScript` follows this [style guide](https://google.github.io/styleguide/jsguide.html)
+- [completed] Your JavaScript defines 1 or less global variables
+- [completed] The Calculator display is not an `<input>`
+- [completed] Typing a relevant key at any point is reflected on the calculator
+- [completed] Typing a relevant key causes the corresponding button on the calculator to appear to have been pressed. AKA flashes active
+- [completed] The state of the calculator is not be stored in the `DOM`
+- [completed] The mathematical operations for your calculator are each their own function, and are defined outside of any DOM event handler
+- [ ] When the length of the number displayed exceeds the width available, the font-size deterministically drops
 
 
 ### Stage 3
@@ -152,12 +154,12 @@ In stage 3 you are going to add a second calculator to the page. Both calculator
 
 ##### Specs
 
-- [X] Each calculator acts independently.
-- [X] Clicking anywhere on a calculator focuses that calculator.
-- [X] Typing a relevant key affects the focused calculator.
-- [X] Use event delegation to avoid binding a `click` event listener to each button
-- [X] The focused calculator is `opacity: 1`
-- [X] The not-focused calculator is `opacity: 0.5`
+- [ ] Each calculator acts independently.
+- [ ] Clicking anywhere on a calculator focuses that calculator.
+- [ ] Typing a relevant key affects the focused calculator.
+- [ ] Use event delegation to avoid binding a `click` event listener to each button
+- [ ] The focused calculator is `opacity: 1`
+- [ ] The not-focused calculator is `opacity: 0.5`
 
 
 ### Stage 4
@@ -216,12 +218,12 @@ In stage 5 you are going to add persistence to your express server. We're going 
 
 ##### Specs
 
-- [Stretch] there is only one calculator on the page
-- [Stretch] the calculator displays a scrolling history of calculations
-- [Stretch] the most recent calculation result is at the bottom
-- [Stretch] the scroll-back history is always scrolled to the bottom when a new operation result is added
-- [Stretch] the calculator history is stored per visitor (browser)
-- [Stretch] the express app uses a cookie to track individual visitors
-- [Stretch] reloading the page restores the calculator history
-- [Stretch] the server stores up to 100 calculation results
-- [Stretch] all mathematical operations have their own function, defined outside of any express router handlers.
+- [X] there is only one calculator on the page
+- [X] the calculator displays a scrolling history of calculations
+- [X] the most recent calculation result is at the bottom
+- [X] the scroll-back history is always scrolled to the bottom when a new operation result is added
+- [X] the calculator history is stored per visitor (browser)
+- [X] the express app uses a cookie to track individual visitors
+- [X] reloading the page restores the calculator history
+- [X] the server stores up to 100 calculation results
+- [X] all mathematical operations have their own function, defined outside of any express router handlers.
