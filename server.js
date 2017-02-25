@@ -5,32 +5,25 @@ app.use(express.static(__dirname + '/public'))
 
 app.use(require('./routes/routes'))
 
-app.get('/api/add/:a/:b', (req, res) => {
+app.get('/api/:operator/:a/:b', (req, res) => {
   const a = Number(req.params.a)
   const b = Number(req.params.b)
-  const result = add(a,b)
-  res.send(result.toString())
-})
-
-app.get('/api/subtract/:a/:b', (req, res) => {
-  const a = Number(req.params.a)
-  const b = Number(req.params.b)
-  const result = subtract(a,b)
-  res.send(result.toString())
-  })
-
-app.get('/api/multiply/:a/:b', (req, res) => {
-  const a = Number(req.params.a)
-  const b = Number(req.params.b)
-  const result = multiply(a,b)
-  res.send(result.toString())
-
-})
-
-app.get('/api/divide/:a/:b', (req, res) => {
-  const a = Number(req.params.a)
-  const b = Number(req.params.b)
-  const result = divide(a,b)
+  const operator = req.params.operator
+  let result;
+  switch (operator) {
+    case '+':
+      result = add(a, b)
+      break;
+    case '-':
+      result = subtract(a, b)
+      break;
+    case '*':
+      result = multiply(a, b)
+      break;
+    case '/':
+      result = divide(a, b)
+      break;
+    }
   res.send(result.toString())
 })
 
