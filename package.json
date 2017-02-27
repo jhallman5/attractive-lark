@@ -1,0 +1,27 @@
+{
+  "name": "timely-frog",
+  "version": "1.0.0",
+  "description": "benchmark calculator",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhallman5/timely-frog.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhallman5/timely-frog/issues"
+  },
+  "homepage": "https://github.com/jhallman5/timely-frog#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "normalize.css": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
