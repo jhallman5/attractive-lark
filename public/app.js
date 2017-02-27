@@ -52,6 +52,7 @@ var target = event.target || event.srcElement
   if(target.dataset.equal) {
      equate(stacks.operand, stacks.operator)
     }
+    console.log(stacks)
   document.querySelector('.calculator-screen').innerHTML = stacks.operand[stacks.operand.length -1 ] || ''
 })
 
@@ -103,24 +104,10 @@ function operatorHasLowerPriority(stackOps, operator) {
 }
 
 function evalulate(stackNum, stackOps) {
-  var value1 = parseFloat(stackNum.pop())
+  var valueLowPriority = parseFloat(stackNum.pop())
   var comparison = stackOps.pop()
-  var value2 = parseFloat(stackNum.pop())
-  switch (comparison) {
-    case '+':
-      value1 = add(value1, value2, setCalculatorScreen)
-
-      break;
-    case '-':
-      value1 = subtract(value1, value2, setCalculatorScreen)
-      break;
-    case '*':
-      value1 = multiply(value1, value2, setCalculatorScreen)
-      break;
-    case '/':
-      value1 = divide(value1, value2, setCalculatorScreen)
-      break;
-    }
+  var valueHighPriority = parseFloat(stackNum.pop())
+  serverSideMath(valueHighPriority, valueLowPriority, comparison, setCalculatorScreen)
 }
 
 function setCalculatorScreen(promiseValue) {
@@ -128,32 +115,13 @@ function setCalculatorScreen(promiseValue) {
   document.querySelector('.calculator-screen').innerHTML = promiseValue
 }
 
-function add(a, b, callback) {
-  fetch(`/api/add/${a}/${b}`)
-    .then(response => response.text())
+function serverSideMath(a, b, operator, callback) {
+  fetch(`/api/${operator}/${a}/${b}`, {
+    method: "POST"
+  })
+    .then(response => response.json())
     .then(result =>{
         callback(result)
-    })
-}
-function subtract(a, b,callback) {
-  fetch(`/api/subtract/${a}/${b}`)
-    .then(response => response.text())
-    .then(result => {
-      callback(result)
-    })
-}
-function multiply(a, b, callback) {
-  fetch(`/api/multiply/${a}/${b}`)
-    .then(response => response.text())
-    .then(result => {
-      callback(result)
-    })
-}
-function divide(a, b, callback) {
-  fetch(`/api/divide/${a}/${b}`)
-    .then(response => response.text())
-    .then(result => {
-      callback(result)
     })
 }
 
@@ -161,6 +129,7 @@ function equate(stackNum, stackOps) {
   while(stackNum.length > 1) {
     evalulate(stackNum, stackOps)
   }
+
   return stackNum
 }
 
