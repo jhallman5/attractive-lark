@@ -5,7 +5,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.use(require('./routes/routes'))
 
-app.get('/api/:operator/:a/:b', (req, res) => {
+app.post('/api/:operator/:a/:b', (req, res) => {
   const a = Number(req.params.a)
   const b = Number(req.params.b)
   const operator = req.params.operator

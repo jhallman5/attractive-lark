@@ -116,8 +116,10 @@ function setCalculatorScreen(promiseValue) {
 }
 
 function serverSideMath(a, b, operator, callback) {
-  fetch(`/api/${operator}/${a}/${b}`)
-    .then(response => response.text())
+  fetch(`/api/${operator}/${a}/${b}`, {
+    method: "POST"
+  })
+    .then(response => response.json())
     .then(result =>{
         callback(result)
     })
